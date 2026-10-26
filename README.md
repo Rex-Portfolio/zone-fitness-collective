@@ -71,11 +71,21 @@ Trainer photos should share one canvas size, with the person standing on the bot
 
 The files in `public/assets`, `public/og.png`, `src/app/icon.png`, and `src/app/apple-icon.png` are generated stand-ins so the page runs before the real artwork arrives. They are marked as placeholders in the image itself.
 
+## Site URL
+
+Canonical links, Open Graph, and the structured data read `NEXT_PUBLIC_SITE_URL`. Copy `.env.example` to `.env.local` for local runs:
+
+```
+NEXT_PUBLIC_SITE_URL=https://zonefitnesscollective.com
+```
+
+On Vercel, set the same variable before you deploy. Next.js bakes it in at build time, so change it and redeploy when the host changes. If the variable is missing, the site uses `https://zonefitnesscollective.com`. A trailing slash is ignored. The value must be an absolute `http` or `https` URL.
+
 ## Deploy on Vercel
 
 1. Push this repository to GitHub.
 2. In Vercel, add a new project and import the GitHub repository.
-3. Use the Next.js preset. Build command: `npm run build`. Install command: `npm install`. No environment variables are required.
+3. Use the Next.js preset. Build command: `npm run build`. Install command: `npm install`. Add `NEXT_PUBLIC_SITE_URL` with the value `https://zonefitnesscollective.com`.
 4. Deploy.
 5. Open the project, then Settings, then Domains.
 6. Add `zonefitnesscollective.com`.

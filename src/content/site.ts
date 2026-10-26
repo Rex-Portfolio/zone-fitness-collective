@@ -43,6 +43,28 @@ export type SocialLink = {
   href: string;
 };
 
+const DEFAULT_SITE_URL = "https://zonefitnesscollective.com";
+
+function readSiteUrl(): string {
+  const configured = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  const value = (configured && configured.length > 0 ? configured : DEFAULT_SITE_URL).replace(
+    /\/+$/,
+    "",
+  );
+  let url: URL;
+  try {
+    url = new URL(value);
+  } catch {
+    throw new Error(
+      "NEXT_PUBLIC_SITE_URL must be an absolute URL such as https://zonefitnesscollective.com.",
+    );
+  }
+  if (url.protocol !== "http:" && url.protocol !== "https:") {
+    throw new Error("NEXT_PUBLIC_SITE_URL must start with http:// or https://.");
+  }
+  return url.origin;
+}
+
 const links = {
   tally: "https://tally.so/r/TALLY_URL",
   maps: "https://maps.google.com/?q=MAPS_URL",
@@ -57,7 +79,7 @@ const links = {
 export const site = {
   name: "Zone Fitness Collective",
   shortName: "ZFC",
-  url: "https://zonefitnesscollective.com",
+  url: readSiteUrl(),
   links,
   assets: {
     logo: "/assets/logo.png",
