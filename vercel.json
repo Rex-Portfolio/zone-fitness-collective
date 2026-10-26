@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.zonefitnesscollective.com"
+        }
+      ],
+      "destination": "https://zonefitnesscollective.com/:path*",
+      "permanent": true
+    }
+  ]
+}
